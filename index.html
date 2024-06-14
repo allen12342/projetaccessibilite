@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,115 +8,225 @@
     <title>Quiz Vitrine</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
             margin: 0;
             padding: 0;
         }
+
         header {
-            background: #333;
+            background: #003366;
             color: #fff;
             padding: 1em 0;
             text-align: center;
+            position: relative;
         }
+
+        header nav {
+            margin-top: 10px;
+        }
+
+        header nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        header nav ul li {
+            display: inline;
+        }
+
+        header nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 5px 10px;
+            transition: background 0.3s ease;
+        }
+
+        header nav ul li a:hover {
+            background: #ff6600;
+            border-radius: 5px;
+        }
+
         main {
             padding: 20px;
         }
+
         section {
             margin-bottom: 20px;
         }
+
+        .filter-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 300px;
+            height: 100%;
+            background: #fff;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            overflow-y: auto;
+            padding: 20px;
+            z-index: 1000;
+        }
+
+        .filter-menu.open {
+            transform: translateX(0);
+        }
+
+        .filter-menu h2 {
+            margin-top: 0;
+        }
+
+        .filter-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: #ff6600;
+            color: #fff;
+            padding: 15px 20px;
+            border: none;
+            cursor: pointer;
+            z-index: 1100;
+            font-size: 16px;
+        }
+
+        .filter-toggle:hover {
+            background: #cc5200;
+        }
+
         #readTextButton {
-            background: #007BFF;
+            background: #ff6600;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 15px 20px;
             cursor: pointer;
+            font-size: 16px;
+            position: fixed;
+            top: 60px;
+            left: 20px;
+            z-index: 1100;
         }
+
         #readTextButton:hover {
-            background: #0056b3;
+            background: #cc5200;
         }
-        .filters {
-            margin-bottom: 20px;
-        }
+
         .filters label {
-            margin-right: 10px;
+            display: block;
+            margin-bottom: 10px;
         }
-        .filters input {
-            margin-right: 5px;
+
+        .quiz-item {
+            background: #fff;
+            padding: 15px;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            width: calc(33% - 20px);
+            box-sizing: border-box;
+            margin: 10px;
+            text-align: center;
+            border-radius: 10px;
         }
-        .hidden {
-            display: none;
+
+        .quiz-item h3 {
+            margin: 0 0 10px 0;
+            color: #003366;
         }
+
+        /* Classes for accessibility filters */
         .dyslexie {
-            font-family: Arial, sans-serif; /* Replace with a dyslexia-friendly font if available */
+            font-family: 'OpenDyslexic', Arial, sans-serif;
         }
+
         .fatigue-visuelle {
-            font-size: 1.2em;
+            filter: contrast(1.5);
         }
+
         .mode-nuit {
-            background-color: #000;
+            background-color: #333;
             color: #fff;
         }
-        .daltonisme-vert, .daltonisme-rouge, .daltonisme-bleu {
-            filter: grayscale(100%);
-        }
-        .senior {
-            font-size: 1.3em;
-        }
-        .cataracte {
-            opacity: 0.8;
-        }
-        .malvoyance {
-            font-size: 1.5em;
-        }
-        .geste-imprecis {
-            cursor: pointer;
-        }
-        .migraine-ophtalmique {
-            background: #ffeb3b;
-        }
-        .maladie-parkinson, .maladie-wilson {
-            font-size: 1.1em;
-        }
-        .dmla, .presbytie {
-            font-size: 1.4em;
-        }
-        .lumiere-bleue {
-            filter: sepia(100%);
-        }
-        .sclerose-en-plaques, .tremblements-essentiels {
-            font-size: 1.2em;
-        }
-        .arthrose {
-            padding: 20px;
-        }
+
+        .daltonisme-vert,
+        .daltonisme-rouge,
+        .daltonisme-bleu,
         .achromatie {
             filter: grayscale(100%);
         }
-        .epilepsie-photosensible {
-            animation: blink 1s step-start infinite;
+
+        .senior,
+        .maladie-parkinson,
+        .maladie-wilson,
+        .presbytie {
+            font-size: 1.5em;
         }
-        @keyframes blink {
+
+        .cataracte {
+            filter: blur(2px);
+        }
+
+        .malvoyance,
+        .dmla {
+            filter: blur(4px);
+        }
+
+        .geste-imprecis,
+        .sclerose-en-plaques,
+        .tremblements-essentiels,
+        .arthrose {
+            cursor: pointer;
+        }
+
+        .migraine-ophtalmique {
+            filter: invert(100%);
+        }
+
+        .lumiere-bleue {
+            filter: hue-rotate(90deg);
+        }
+
+        .epilepsie-photosensible {
+            animation: flash 1s infinite;
+        }
+
+        @keyframes flash {
+            0%,
+            100% {
+                opacity: 1;
+            }
+
             50% {
                 opacity: 0;
             }
         }
-        .quiz-item {
-            background: #f9f9f9;
-            padding: 15px;
-            border: 1px solid #ddd;
-            margin-bottom: 10px;
-        }
-        .quiz-item h3 {
-            margin: 0 0 10px 0;
-        }
     </style>
 </head>
+
 <body>
     <header>
-        <h1>Bienvenue sur Quiz Vitrine</h1>
+        <h1>Bienvenue sur Odicome (site Vitrine)</h1>
+        <nav>
+            <ul>
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#formulaire">Formulaire</a></li>
+                <li><a href="#quiz">Quiz</a></li>
+                <li><a href="#participants">Participants</a></li>
+                <li><a href="#statistique">Statistique</a></li>
+                <li><a href="#connexion">Connexion</a></li>
+            </ul>
+        </nav>
     </header>
-    <main>
+    <button class="filter-toggle">Filtres</button>
+    <button id="readTextButton">Lire le texte</button>
+    <div class="filter-menu">
+        <h2>Filtres d'accessibilité</h2>
         <div class="filters">
             <label><input type="checkbox" data-filter="dyslexie"> Dyslexie</label>
             <label><input type="checkbox" data-filter="fatigue-visuelle"> Fatigue Visuelle</label>
@@ -139,28 +250,48 @@
             <label><input type="checkbox" data-filter="achromatie"> Achromatie</label>
             <label><input type="checkbox" data-filter="epilepsie-photosensible"> Épilepsie photosensible</label>
         </div>
-        
-        <section>
-            <h2>À propos de Quiz Vitrine</h2>
-            <p>Quiz Vitrine est une plateforme interactive où vous pouvez tester vos connaissances sur divers sujets.</p>
+    </div>
+    <main>
+        <section id="accueil">
+            <h2>À propos de Odicome (site Vitrine)</h2>
+            <p> Odicomec( Vitrine) est est une plateforme interactive de quiz ayant des fonctionnalites en plus pour des personnes ayant des desavantages sur le web tels que les malvoyants les sours ... où vous pouvez tester vos connaissances sur divers sujets.</p>
         </section>
-        
-        <section>
+
+        <section id="formulaire">
             <h2>Fonctionnalités</h2>
             <p>Notre site propose des quiz sur une multitude de sujets, un suivi de vos scores, et la possibilité de défier vos amis.</p>
         </section>
-        
-        <section>
+
+        <section id="quiz">
             <h2>Comment ça marche ?</h2>
-            <p>Inscrivez-vous, choisissez un quiz, et commencez à répondre aux questions. Vous pouvez voir vos résultats immédiatement.</p>
+            <p>Inscrivez-vous, choisissez un quiz et commencez à tester vos connaissances. Gagnez des points et montez dans le classement !</p>
         </section>
-        <section>
-          <h2>À propos de Quiz Vitrine</h2>
-          <p>Quiz Vitrine est une plateforme interactive où vous pouvez tester vos connaissances sur divers sujets.</p>
-      </section>
-  
-      
-        <section>
+
+        <section id="participants">
+            <h2>Bienvenue rff sur votre portail d’administration</h2>
+            <div class="quiz-item">
+                <h3>Formulaires</h3>
+                <p>Aucune formulaire actuellement </p>
+                <button>Gerer les formulaires</button>
+            </div>  
+            <div class="quiz-item">
+                <h3>Quiz</h3>
+                <p>Aucun Quiz  actuellement </p>
+                <button>Gerer les quiz</button>
+            </div>  
+            <div class="quiz-item">
+                <h3>Participants</h3>
+                <p>Aucun participant actuellement </p>
+                <button>Gerer les participants</button>
+            </div>  
+            <div class="quiz-item">
+                <h3>Statistiques</h3>
+                <p>Aucune participation aux formulaires </p>
+                <p>participation aux quiz </p>
+                <button>Voir les statistiques </button>
+            </div>      
+
+
             <h2>Quiz populaires</h2>
             <div class="quiz-item">
                 <h3>Quiz sur l'Histoire</h3>
@@ -176,40 +307,25 @@
                 <h3>Quiz sur la Culture Générale</h3>
                 <p>Un quiz pour évaluer votre culture générale.</p>
                 <button>Commencer</button>
-                <div class="quiz-item">
-                  <h3>Quiz sur l'Histoire</h3>
-                  <p>Mettez à l'épreuve vos connaissances sur l'histoire mondiale.</p>
-                  <button>Commencer</button>
-              </div>
-              <div class="quiz-item">
-                  <h3>Quiz sur la Science</h3>
-                  <p>Testez vos connaissances scientifiques avec des questions variées.</p>
-                  <button>Commencer</button>
-              </div>
-              <div class="quiz-item">
-                  <h3>Quiz sur la Culture Générale</h3>
-                  <p>Un quiz pour évaluer votre culture générale.</p>
-                  <button>Commencer</button>
-              </div>
-              <div class="quiz-item">
-                <h3>Quiz sur l'Histoire</h3>
-                <p>Mettez à l'épreuve vos connaissances sur l'histoire mondiale.</p>
+            </div>
+            <div class="quiz-item">
+                <h3>Quiz sur les presidents </h3>
+                <p>Mettez à l'épreuve vos connaissances sur les presidents</p>
                 <button>Commencer</button>
             </div>
             <div class="quiz-item">
-                <h3>Quiz sur la Science</h3>
-                <p>Testez vos connaissances scientifiques avec des questions variées.</p>
+                <h3>Quiz sur les pays</h3>
+                <p>Testez vos connaissances sur les pays avec des questions variées.</p>
                 <button>Commencer</button>
             </div>
             <div class="quiz-item">
-                <h3>Quiz sur la Culture Générale</h3>
-                <p>Un quiz pour évaluer votre culture générale.</p>
+                <h3>Quiz sur la culture pop</h3>
+                <p>Un quiz pour évaluer votre culture pop.</p>
                 <button>Commencer</button>
-            </div>
             </div>
         </section>
-        
-        <section>
+
+        <section id="statistique">
             <h2>Classements</h2>
             <p>Voyez comment vous vous situez par rapport aux autres utilisateurs.</p>
             <ul>
@@ -220,76 +336,72 @@
                 <li>Utilisateur 5: 1300 points</li>
             </ul>
         </section>
-        
-        <section>
+
+        <section id="connexion">
             <h2>Profils Utilisateurs</h2>
             <p>Accédez à votre profil pour voir vos scores et vos progrès.</p>
             <button>Voir mon profil</button>
         </section>
-        
+
         <section>
             <h2>Rejoignez-nous</h2>
             <p>Créez un compte aujourd'hui et rejoignez notre communauté de passionnés de quiz. C'est gratuit et amusant !</p>
             <button>Créer un compte</button>
         </section>
-        
-        <button id="readTextButton">Lire le texte</button>
     </main>
 
     <script>
-      document.addEventListener('DOMContentLoaded', (event) => {
-        const readTextButton = document.getElementById('readTextButton');
-        const sections = document.querySelectorAll('main section');
-        let currentSectionIndex = 0;
-        let isReading = false;
-        const synth = window.speechSynthesis;
-
-        function readSection(index) {
-            if (index < sections.length) {
-                const content = sections[index].textContent;
-                const utterThis = new SpeechSynthesisUtterance(content);
-                utterThis.lang = 'fr-FR';
-                synth.speak(utterThis);
-                
-                utterThis.onend = () => {
-                    if (isReading) {
-                        readTextButton.textContent = 'Lire le texte';
-                    }
-                };
-            }
-        }
-
-        readTextButton.addEventListener('click', () => {
-            isReading = !isReading;
-            if (isReading) {
-                readSection(currentSectionIndex);
-                readTextButton.textContent = 'Arrêter la lecture';
-            } else {
-                synth.cancel();
-                readTextButton.textContent = 'Lire le texte';
-            }
-        });
-
-        document.addEventListener('keydown', (event) => {
-            if (event.key === 'Tab') {
-                event.preventDefault(); // Empêcher le comportement par défaut de Tab
-                if (isReading) {
-                    currentSectionIndex = (currentSectionIndex + 1) % sections.length;
-                    synth.cancel();
-                    readSection(currentSectionIndex);
-                } else {
-                    isReading = true;
-                    readSection(currentSectionIndex);
-                    readTextButton.textContent = 'Arrêter la lecture';
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const readTextButton = document.getElementById('readTextButton');
+            const sections = document.querySelectorAll('main section');
+            let currentSectionIndex = 0;
+            let isReading = false;
+            const synth = window.speechSynthesis;
+    
+            function readSection(index) {
+                if (index < sections.length) {
+                    const content = sections[index].textContent;
+                    const utterThis = new SpeechSynthesisUtterance(content);
+                    utterThis.lang = 'fr-FR';
+                    synth.speak(utterThis);
+                    
+                    utterThis.onend = () => {
+                        if (isReading) {
+                            readTextButton.textContent = 'Lire le texte';
+                        }
+                    };
                 }
             }
+    
+            readTextButton.addEventListener('click', () => {
+                isReading = !isReading;
+                if (isReading) {
+                    readSection(currentSectionIndex);
+                    readTextButton.textContent = 'Arrêter la lecture';
+                } else {
+                    synth.cancel();
+                    readTextButton.textContent = 'Lire le texte';
+                }
+            });
+    
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Tab') {
+                    event.preventDefault(); // Empêcher le comportement par défaut de Tab
+                    if (isReading) {
+                        currentSectionIndex = (currentSectionIndex + 1) % sections.length;
+                        synth.cancel();
+                        readSection(currentSectionIndex);
+                    } else {
+                        isReading = true;
+                        readSection(currentSectionIndex);
+                        readTextButton.textContent = 'Arrêter la lecture';
+                    }
+                }
+            });
         });
-    });
-
-
+    
 
             // Filtrage des sections
-            const filters = document.querySelectorAll('.filters input');
             filters.forEach(filter => {
                 filter.addEventListener('change', () => {
                     const filterClass = filter.getAttribute('data-filter');
@@ -300,7 +412,14 @@
                     }
                 });
             });
+
+            // Menu coulissant
+            const filterToggle = document.querySelector('.filter-toggle');
+            filterToggle.addEventListener('click', () => {
+                filterMenu.classList.toggle('open');
+            });
         
     </script>
 </body>
+
 </html>
