@@ -1,0 +1,61 @@
+README - Quiz Vitrine
+Description
+
+Quiz Vitrine est une plateforme interactive conçue pour permettre aux utilisateurs de tester leurs connaissances à travers divers quiz sur des sujets variés. Ce README décrit les fonctionnalités du site et comment il est structuré.
+
+Fonctionnalités Principales
+
+Navigation Facile :
+
+La barre de navigation en haut de la page permet de naviguer rapidement vers différentes sections telles que l'accueil, le formulaire, les quiz, les participants, les statistiques, et la connexion.
+Sections Informatives :
+
+Accueil : Donne une introduction à Quiz Vitrine.
+Formulaire : Explique les fonctionnalités du site, y compris les quiz et le suivi des scores.
+Quiz : Détails sur la façon de participer aux quiz et de gagner des points.
+Participants : Présentation des quiz populaires disponibles.
+Statistique : Classement des utilisateurs en fonction de leurs scores.
+Connexion : Informations sur l'accès aux profils utilisateurs.
+Accessibilité Améliorée :
+
+Un menu de filtres permet aux utilisateurs de sélectionner des options d'accessibilité comme la dyslexie, la fatigue visuelle, le mode nuit, etc., pour adapter l'interface selon leurs besoins.
+Lecture du Texte :
+
+Le bouton "Lire le texte" permet aux utilisateurs d'entendre le contenu textuel des sections affichées ainsi que des filtres sélectionnés, facilitant l'accès pour les utilisateurs ayant des besoins particuliers en matière d'accessibilité.
+Comment Utiliser et tab permet de passer de section en section 
+
+Cloner ce repository sur votre machine locale :
+
+bash
+Copier le code
+git clone https://github.com/votre-utilisateur/quiz-vitrine.git
+Ouvrir le fichier index.html dans votre navigateur pour accéder au site.
+
+Technologies Utilisées
+
+HTML5
+CSS3 (avec flexbox pour la mise en page)
+JavaScript (pour la gestion des événements et l'interaction avec l'utilisateur)
+Speech Synthesis API (pour la synthèse vocale du texte)
+Comment Contribuer
+
+Forker le repository.
+Créer une nouvelle branche (git checkout -b ameliorations-fonctionnalites).
+Faire des modifications et les tester localement.
+Commiter les changements (git commit -am 'Ajout de nouvelles fonctionnalités').
+Pousser les modifications sur la branche (git push origin ameliorations-fonctionnalites).
+Créer une pull request.
+Auteur
+
+Ce projet a été réalisé par Votre   Mike sam thomas et migeuel
+
+Licence
+
+Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
+
+Ce README fournit un aperçu complet du projet Quiz Vitrine, expliquant ses fonctionnalités principales, comment l'utiliser, comment contribuer, et les technologies utilisées. Il est conçu pour aider les utilisateurs à comprendre et à utiliser efficacement le site.
+
+
+
+
+
