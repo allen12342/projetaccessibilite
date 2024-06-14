@@ -357,7 +357,10 @@
             let currentSectionIndex = 0;
             let isReading = false;
             const synth = window.speechSynthesis;
-    
+            const filterToggle = document.querySelector('.filter-toggle');
+            const filterMenu = document.querySelector('.filter-menu');
+            const filters = document.querySelectorAll('.filters input[type="checkbox"]');
+
             function readSection(index) {
                 if (index < sections.length) {
                     const content = sections[index].textContent;
@@ -398,8 +401,6 @@
                     }
                 }
             });
-        });
-    
 
             // Filtrage des sections
             filters.forEach(filter => {
@@ -414,11 +415,10 @@
             });
 
             // Menu coulissant
-            const filterToggle = document.querySelector('.filter-toggle');
             filterToggle.addEventListener('click', () => {
                 filterMenu.classList.toggle('open');
             });
-        
+        });
     </script>
 </body>
 
