@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Quiz Vitrine</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding: 1em 0;
+            text-align: center;
+        }
+        main {
+            padding: 20px;
+        }
+        section {
+            margin-bottom: 20px;
+        }
+        #readTextButton {
+            background: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        #readTextButton:hover {
+            background: #0056b3;
+        }
+        .filters {
+            margin-bottom: 20px;
+        }
+        .filters label {
+            margin-right: 10px;
+        }
+        .filters input {
+            margin-right: 5px;
+        }
+        .hidden {
+            display: none;
+        }
+        .dyslexie {
+            font-family: Arial, sans-serif; /* Replace with a dyslexia-friendly font if available */
+        }
+        .fatigue-visuelle {
+            font-size: 1.2em;
+        }
+        .mode-nuit {
+            background-color: #000;
+            color: #fff;
+        }
+        .daltonisme-vert, .daltonisme-rouge, .daltonisme-bleu {
+            filter: grayscale(100%);
+        }
+        .senior {
+            font-size: 1.3em;
+        }
+        .cataracte {
+            opacity: 0.8;
+        }
+        .malvoyance {
+            font-size: 1.5em;
+        }
+        .geste-imprecis {
+            cursor: pointer;
+        }
+        .migraine-ophtalmique {
+            background: #ffeb3b;
+        }
+        .maladie-parkinson, .maladie-wilson {
+            font-size: 1.1em;
+        }
+        .dmla, .presbytie {
+            font-size: 1.4em;
+        }
+        .lumiere-bleue {
+            filter: sepia(100%);
+        }
+        .sclerose-en-plaques, .tremblements-essentiels {
+            font-size: 1.2em;
+        }
+        .arthrose {
+            padding: 20px;
+        }
+        .achromatie {
+            filter: grayscale(100%);
+        }
+        .epilepsie-photosensible {
+            animation: blink 1s step-start infinite;
+        }
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+        .quiz-item {
+            background: #f9f9f9;
+            padding: 15px;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+        }
+        .quiz-item h3 {
+            margin: 0 0 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Bienvenue sur Quiz Vitrine</h1>
+    </header>
+    <main>
+        <div class="filters">
+            <label><input type="checkbox" data-filter="dyslexie"> Dyslexie</label>
+            <label><input type="checkbox" data-filter="fatigue-visuelle"> Fatigue Visuelle</label>
+            <label><input type="checkbox" data-filter="mode-nuit"> Mode nuit</label>
+            <label><input type="checkbox" data-filter="daltonisme-vert"> Daltonisme vert</label>
+            <label><input type="checkbox" data-filter="daltonisme-rouge"> Daltonisme rouge</label>
+            <label><input type="checkbox" data-filter="daltonisme-bleu"> Daltonisme bleu</label>
+            <label><input type="checkbox" data-filter="senior"> Senior</label>
+            <label><input type="checkbox" data-filter="cataracte"> Cataracte</label>
+            <label><input type="checkbox" data-filter="malvoyance"> Malvoyance</label>
+            <label><input type="checkbox" data-filter="geste-imprecis"> Geste imprécis</label>
+            <label><input type="checkbox" data-filter="migraine-ophtalmique"> Migraine Ophtalmique</label>
+            <label><input type="checkbox" data-filter="maladie-parkinson"> Maladie de Parkinson</label>
+            <label><input type="checkbox" data-filter="maladie-wilson"> Maladie de Wilson</label>
+            <label><input type="checkbox" data-filter="dmla"> DMLA</label>
+            <label><input type="checkbox" data-filter="presbytie"> Presbytie</label>
+            <label><input type="checkbox" data-filter="lumiere-bleue"> Lumière bleue</label>
+            <label><input type="checkbox" data-filter="sclerose-en-plaques"> Sclérose en plaques</label>
+            <label><input type="checkbox" data-filter="tremblements-essentiels"> Tremblements essentiels</label>
+            <label><input type="checkbox" data-filter="arthrose"> Arthrose</label>
+            <label><input type="checkbox" data-filter="achromatie"> Achromatie</label>
+            <label><input type="checkbox" data-filter="epilepsie-photosensible"> Épilepsie photosensible</label>
+        </div>
+        
+        <section>
+            <h2>À propos de Quiz Vitrine</h2>
+            <p>Quiz Vitrine est une plateforme interactive où vous pouvez tester vos connaissances sur divers sujets.</p>
+        </section>
+        
+        <section>
+            <h2>Fonctionnalités</h2>
+            <p>Notre site propose des quiz sur une multitude de sujets, un suivi de vos scores, et la possibilité de défier vos amis.</p>
+        </section>
+        
+        <section>
+            <h2>Comment ça marche ?</h2>
+            <p>Inscrivez-vous, choisissez un quiz, et commencez à répondre aux questions. Vous pouvez voir vos résultats immédiatement.</p>
+        </section>
+        <section>
+          <h2>À propos de Quiz Vitrine</h2>
+          <p>Quiz Vitrine est une plateforme interactive où vous pouvez tester vos connaissances sur divers sujets.</p>
+      </section>
+  
+      
+        <section>
+            <h2>Quiz populaires</h2>
+            <div class="quiz-item">
+                <h3>Quiz sur l'Histoire</h3>
+                <p>Mettez à l'épreuve vos connaissances sur l'histoire mondiale.</p>
+                <button>Commencer</button>
+            </div>
+            <div class="quiz-item">
+                <h3>Quiz sur la Science</h3>
+                <p>Testez vos connaissances scientifiques avec des questions variées.</p>
+                <button>Commencer</button>
+            </div>
+            <div class="quiz-item">
+                <h3>Quiz sur la Culture Générale</h3>
+                <p>Un quiz pour évaluer votre culture générale.</p>
+                <button>Commencer</button>
+                <div class="quiz-item">
+                  <h3>Quiz sur l'Histoire</h3>
+                  <p>Mettez à l'épreuve vos connaissances sur l'histoire mondiale.</p>
+                  <button>Commencer</button>
+              </div>
+              <div class="quiz-item">
+                  <h3>Quiz sur la Science</h3>
+                  <p>Testez vos connaissances scientifiques avec des questions variées.</p>
+                  <button>Commencer</button>
+              </div>
+              <div class="quiz-item">
+                  <h3>Quiz sur la Culture Générale</h3>
+                  <p>Un quiz pour évaluer votre culture générale.</p>
+                  <button>Commencer</button>
+              </div>
+              <div class="quiz-item">
+                <h3>Quiz sur l'Histoire</h3>
+                <p>Mettez à l'épreuve vos connaissances sur l'histoire mondiale.</p>
+                <button>Commencer</button>
+            </div>
+            <div class="quiz-item">
+                <h3>Quiz sur la Science</h3>
+                <p>Testez vos connaissances scientifiques avec des questions variées.</p>
+                <button>Commencer</button>
+            </div>
+            <div class="quiz-item">
+                <h3>Quiz sur la Culture Générale</h3>
+                <p>Un quiz pour évaluer votre culture générale.</p>
+                <button>Commencer</button>
+            </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>Classements</h2>
+            <p>Voyez comment vous vous situez par rapport aux autres utilisateurs.</p>
+            <ul>
+                <li>Utilisateur 1: 1500 points</li>
+                <li>Utilisateur 2: 1450 points</li>
+                <li>Utilisateur 3: 1400 points</li>
+                <li>Utilisateur 4: 1350 points</li>
+                <li>Utilisateur 5: 1300 points</li>
+            </ul>
+        </section>
+        
+        <section>
+            <h2>Profils Utilisateurs</h2>
+            <p>Accédez à votre profil pour voir vos scores et vos progrès.</p>
+            <button>Voir mon profil</button>
+        </section>
+        
+        <section>
+            <h2>Rejoignez-nous</h2>
+            <p>Créez un compte aujourd'hui et rejoignez notre communauté de passionnés de quiz. C'est gratuit et amusant !</p>
+            <button>Créer un compte</button>
+        </section>
+        
+        <button id="readTextButton">Lire le texte</button>
+    </main>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', (event) => {
+        const readTextButton = document.getElementById('readTextButton');
+        const sections = document.querySelectorAll('main section');
+        let currentSectionIndex = 0;
+        let isReading = false;
+        const synth = window.speechSynthesis;
+
+        function readSection(index) {
+            if (index < sections.length) {
+                const content = sections[index].textContent;
+                const utterThis = new SpeechSynthesisUtterance(content);
+                utterThis.lang = 'fr-FR';
+                synth.speak(utterThis);
+                
+                utterThis.onend = () => {
+                    if (isReading) {
+                        readTextButton.textContent = 'Lire le texte';
+                    }
+                };
+            }
+        }
+
+        readTextButton.addEventListener('click', () => {
+            isReading = !isReading;
+            if (isReading) {
+                readSection(currentSectionIndex);
+                readTextButton.textContent = 'Arrêter la lecture';
+            } else {
+                synth.cancel();
+                readTextButton.textContent = 'Lire le texte';
+            }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Tab') {
+                event.preventDefault(); // Empêcher le comportement par défaut de Tab
+                if (isReading) {
+                    currentSectionIndex = (currentSectionIndex + 1) % sections.length;
+                    synth.cancel();
+                    readSection(currentSectionIndex);
+                } else {
+                    isReading = true;
+                    readSection(currentSectionIndex);
+                    readTextButton.textContent = 'Arrêter la lecture';
+                }
+            }
+        });
+    });
+
+
+
+            // Filtrage des sections
+            const filters = document.querySelectorAll('.filters input');
+            filters.forEach(filter => {
+                filter.addEventListener('change', () => {
+                    const filterClass = filter.getAttribute('data-filter');
+                    if (filter.checked) {
+                        document.body.classList.add(filterClass);
+                    } else {
+                        document.body.classList.remove(filterClass);
+                    }
+                });
+            });
+        
+    </script>
+</body>
+</html>
